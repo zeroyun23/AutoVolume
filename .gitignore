@@ -1,0 +1,22 @@
+# 构建产物
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+.vs/
+
+# 生成物 / 测试产物
+artifacts/
+logs/
+*.log
+
+# 本机工具与记忆（含机器信息）
+.workbuddy/
+spike/**/bin/
+spike/**/obj/
+
+# 系统
+Thumbs.db
+desktop.ini

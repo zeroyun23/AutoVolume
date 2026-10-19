@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>AutoVolume.App</RootNamespace>
+    <AssemblyName>AutoVolume</AssemblyName>
+    <ApplicationIcon Condition="Exists('app.ico')">app.ico</ApplicationIcon>
+    <Version>0.3.7</Version>
+    <FileVersion>0.3.7.0</FileVersion>
+    <AssemblyVersion>0.3.7.0</AssemblyVersion>
+    <Product>AutoVolume</Product>
+    <Description>Windows volume automation tray app</Description>
+    <Company>AutoVolume</Company>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoVolume.Core\AutoVolume.Core.csproj" />
+    <ProjectReference Include="..\AutoVolume.Audio\AutoVolume.Audio.csproj" />
+    <ProjectReference Include="..\AutoVolume.Runtime\AutoVolume.Runtime.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.ico" Condition="Exists('app.ico')" />
+  </ItemGroup>
+</Project>

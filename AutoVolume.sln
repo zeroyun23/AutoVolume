@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F54B040F-9461-4847-97D6-8B49816727D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.Core", "src\AutoVolume.Core\AutoVolume.Core.csproj", "{258D9578-DE41-44E0-B7FE-8A4994F8EF71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.Audio", "src\AutoVolume.Audio\AutoVolume.Audio.csproj", "{5B9181EC-B838-4516-80A4-23A242BAB9E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.Cli", "src\AutoVolume.Cli\AutoVolume.Cli.csproj", "{14812F53-0CB4-41F2-9132-4DC68D887CCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "spike", "spike", "{5C51EC17-CCBC-42F8-B62A-D7F8E579983D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.Spike", "spike\AutoVolume.Spike\AutoVolume.Spike.csproj", "{8FF388F4-DE36-40CE-BEC4-D228271B7316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.Runtime", "src\AutoVolume.Runtime\AutoVolume.Runtime.csproj", "{D8FC179D-E007-42C7-8860-1A8C6CFC35AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVolume.App", "src\AutoVolume.App\AutoVolume.App.csproj", "{0FC5C634-B972-4756-AB99-A5ED42F49AE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{258D9578-DE41-44E0-B7FE-8A4994F8EF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{258D9578-DE41-44E0-B7FE-8A4994F8EF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{258D9578-DE41-44E0-B7FE-8A4994F8EF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{258D9578-DE41-44E0-B7FE-8A4994F8EF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9181EC-B838-4516-80A4-23A242BAB9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9181EC-B838-4516-80A4-23A242BAB9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9181EC-B838-4516-80A4-23A242BAB9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9181EC-B838-4516-80A4-23A242BAB9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14812F53-0CB4-41F2-9132-4DC68D887CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14812F53-0CB4-41F2-9132-4DC68D887CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14812F53-0CB4-41F2-9132-4DC68D887CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14812F53-0CB4-41F2-9132-4DC68D887CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF388F4-DE36-40CE-BEC4-D228271B7316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF388F4-DE36-40CE-BEC4-D228271B7316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF388F4-DE36-40CE-BEC4-D228271B7316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF388F4-DE36-40CE-BEC4-D228271B7316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8FC179D-E007-42C7-8860-1A8C6CFC35AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8FC179D-E007-42C7-8860-1A8C6CFC35AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8FC179D-E007-42C7-8860-1A8C6CFC35AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8FC179D-E007-42C7-8860-1A8C6CFC35AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FC5C634-B972-4756-AB99-A5ED42F49AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC5C634-B972-4756-AB99-A5ED42F49AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC5C634-B972-4756-AB99-A5ED42F49AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC5C634-B972-4756-AB99-A5ED42F49AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{258D9578-DE41-44E0-B7FE-8A4994F8EF71} = {F54B040F-9461-4847-97D6-8B49816727D4}
+		{5B9181EC-B838-4516-80A4-23A242BAB9E8} = {F54B040F-9461-4847-97D6-8B49816727D4}
+		{14812F53-0CB4-41F2-9132-4DC68D887CCC} = {F54B040F-9461-4847-97D6-8B49816727D4}
+		{8FF388F4-DE36-40CE-BEC4-D228271B7316} = {5C51EC17-CCBC-42F8-B62A-D7F8E579983D}
+		{D8FC179D-E007-42C7-8860-1A8C6CFC35AB} = {F54B040F-9461-4847-97D6-8B49816727D4}
+		{0FC5C634-B972-4756-AB99-A5ED42F49AE3} = {F54B040F-9461-4847-97D6-8B49816727D4}
+	EndGlobalSection
+EndGlobal
