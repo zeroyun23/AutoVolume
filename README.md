@@ -15,6 +15,16 @@ C# / .NET 8 + WPF，单文件自包含发布，不依赖系统 .NET。
 | 用户手动调音量 / 手动恢复播放 | 学习音量或让权，本周期不再抢回 |
 | 崩溃 / 强杀 | 下次启动按 `journal.json` 恢复播放与音量 |
 
+## 下载
+
+不装 .NET 也能直接用，去 Release 下载单文件：
+
+- 最新版：<https://github.com/zeroyun23/AutoVolume/releases/latest>
+- 附件 `AutoVolume.exe`（约 179 MB，自包含）
+- 同页 `AutoVolume-0.3.7.sha256.txt` 可用于校验
+
+双击 exe 即用；首次运行会弹设置页，勾选「开机自动启动」后以后只进托盘。
+
 ## 构建
 
 需要 [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)（Windows）。
