@@ -16,6 +16,7 @@ public sealed class VolumeFader
     public float LastWritten { get; private set; }
     public long LastWriteAt { get; private set; } = long.MinValue;
     public string? LastAbort { get; private set; }
+    public string LastDetail { get; private set; } = "";
 
     public void SyncExpected(float value)
     {
@@ -29,11 +30,28 @@ public sealed class VolumeFader
         if (!_vol.TryGetMaster(out float start)) return true; // 读不到就放弃本次渐变
         LastAbort = null;
 
-        if (durationMs <= 0)
+        if (durationMs <= 0 || durationMs < 150)
         {
+            // 短渐变直接一步到位：分步写入会让端点回读排队滞后，反而把正确值读成旧值。
             _vol.SetMaster(target);
             LastWritten = target;
             LastWriteAt = Environment.TickCount64;
+
+            await Task.Delay(350);
+            float fastActual = target;
+            if (_vol.TryGetMaster(out float read))
+            {
+                fastActual = read;
+                if (Math.Abs(fastActual - target) > 0.01f)
+                {
+                    _vol.SetMaster(target);
+                    LastWriteAt = Environment.TickCount64;
+                    await Task.Delay(250);
+                    if (_vol.TryGetMaster(out float again)) fastActual = again;
+                }
+            }
+            LastWritten = fastActual;
+            LastDetail = $"fast={fastActual:0.000}";
             return true;
         }
 
@@ -44,10 +62,15 @@ public sealed class VolumeFader
 
         for (int i = 1; i <= steps; i++)
         {
-            // 蓝牙端点回读会滞后 50-150ms，单次偏差不算用户操作；连续两次才算
+            // 回读滞后时数值仍在 [start, target] 区间内，这属于正常滞后；
+            // 只有跑出区间（含容差）并连续两次，才判定用户在抢音量。
             if (i > 1 && _vol.TryGetMaster(out float now))
             {
-                if (Math.Abs(now - LastWritten) > tolerance)
+                float lo = Math.Min(start, target) - (float)tolerance;
+                float hi = Math.Max(start, target) + (float)tolerance;
+                bool against = now < lo || now > hi;
+
+                if (against)
                 {
                     deviations++;
                     if (deviations >= 2)
@@ -73,22 +96,26 @@ public sealed class VolumeFader
             if (i < steps) await Task.Delay(stepDelay);
         }
 
-        // 端点对密集写入会回弹（约 50ms 后落到中间值）：写完等 120ms 核对，没到位就补写。
+        // 端点回读会滞后：写完等 300ms 核对，没到位再补写。
+        var tries = new List<string>(3);
         for (int attempt = 0; attempt < 3; attempt++)
         {
             _vol.SetMaster(target);
             LastWritten = target;
             LastWriteAt = Environment.TickCount64;
 
-            await Task.Delay(120);
+            await Task.Delay(300);
             if (!_vol.TryGetMaster(out float actual)) break;
+            tries.Add($"{actual:0.000}");
             if (Math.Abs(actual - target) <= 0.005f)
             {
                 LastWritten = actual;
+                LastDetail = string.Join("/", tries);
                 return true;
             }
         }
 
+        LastDetail = string.Join("/", tries);
         if (_vol.TryGetMaster(out float final))
         {
             LastWritten = final;

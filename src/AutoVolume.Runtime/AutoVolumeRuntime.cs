@@ -341,8 +341,8 @@ public sealed class AutoVolumeRuntime : IDisposable
         if (ok) Emit($"音量 → {schemeId} = {target:0.000}");
         else
         {
-            Emit($"渐变被打断（{_fader.LastAbort}），以当前值为准");
-            LearnVolume(schemeId, _vol.GetMaster());
+            // 回读可能滞后，失败时不要把中间值学进方案；保留用户设定的目标值。
+            Emit($"渐变未达目标（{_fader.LastAbort} 试写={_fader.LastDetail} 端点={ShortId(_vol.EndpointId)}）");
         }
     }
 
@@ -353,7 +353,9 @@ public sealed class AutoVolumeRuntime : IDisposable
         // 学习阈值取容差的一半：2% 的整数步进（8%→6%）也要能被记住
         double learnTolerance = Math.Max(0.01, _cfg.Timing.UserTolerance / 2);
         if (Math.Abs(cur - _fader.LastWritten) <= learnTolerance) return;
-        if (Environment.TickCount64 - _fader.LastWriteAt < _cfg.Timing.UserWindowMs) return;
+        // 自动渐变刚结束时，端点回读可能还在排队；这段窗口内一律不学习，避免把旧值写回方案
+        long quietMs = Math.Max(_cfg.Timing.UserWindowMs, 1200);
+        if (Environment.TickCount64 - _fader.LastWriteAt < quietMs) return;
         if (_engine.CurrentScheme is null) return;
 
         LearnVolume(_engine.CurrentScheme, cur);
