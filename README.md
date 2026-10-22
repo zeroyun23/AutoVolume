@@ -95,4 +95,4 @@ AutoVolume.Spike.exe sessmute QQMusic.exe
 
 ## 版本
 
-当前 `0.3.7`。行为细节与实测数据见 `docs/`。
+当前 `0.3.8`。行为细节与实测数据见 `docs/`。

@@ -38,7 +38,8 @@ public sealed class VolumeFader
         }
 
         const int steps = 8;
-        int stepDelay = Math.Max(1, durationMs / steps);
+        // 写入间隔不能太密：低于 25ms 时音频端点会把中间值合并，最后一步容易“回弹”。
+        int stepDelay = Math.Max(25, durationMs / steps);
         int deviations = 0;
 
         for (int i = 1; i <= steps; i++)
@@ -72,9 +73,31 @@ public sealed class VolumeFader
             if (i < steps) await Task.Delay(stepDelay);
         }
 
-        _vol.SetMaster(target);
-        LastWritten = target;
-        LastWriteAt = Environment.TickCount64;
+        // 端点对密集写入会回弹（约 50ms 后落到中间值）：写完等 120ms 核对，没到位就补写。
+        for (int attempt = 0; attempt < 3; attempt++)
+        {
+            _vol.SetMaster(target);
+            LastWritten = target;
+            LastWriteAt = Environment.TickCount64;
+
+            await Task.Delay(120);
+            if (!_vol.TryGetMaster(out float actual)) break;
+            if (Math.Abs(actual - target) <= 0.005f)
+            {
+                LastWritten = actual;
+                return true;
+            }
+        }
+
+        if (_vol.TryGetMaster(out float final))
+        {
+            LastWritten = final;
+            if (Math.Abs(final - target) > 0.005f)
+            {
+                LastAbort = $"final={final:0.000} target={target:0.000}";
+                return false;
+            }
+        }
         return true;
     }
 }
