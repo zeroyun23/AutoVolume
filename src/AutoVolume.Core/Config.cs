@@ -194,7 +194,8 @@ public sealed class AutoVolumeConfig
             ["msedge.exe"] = "source",
             ["vlc.exe"] = "source",
             ["PotPlayerMini64.exe"] = "source",
-            ["PowerToys.Peek.UI.exe"] = "source"
+            ["PowerToys.Peek.UI.exe"] = "source",
+            ["Microsoft.Media.Player.exe"] = "source"
         },
         Schemes =
         {
@@ -206,7 +207,7 @@ public sealed class AutoVolumeConfig
             new SchemeConfig
             {
                 Id = "video", Name = "视频",
-                Members = { "msedge.exe", "vlc.exe", "PotPlayerMini64.exe", "PowerToys.Peek.UI.exe" }
+                Members = { "msedge.exe", "vlc.exe", "PotPlayerMini64.exe", "PowerToys.Peek.UI.exe", "Microsoft.Media.Player.exe" }
             }
         },
         CloseSignal = new(StringComparer.OrdinalIgnoreCase)

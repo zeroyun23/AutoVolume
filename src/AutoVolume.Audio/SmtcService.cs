@@ -79,12 +79,26 @@ public sealed class SmtcService
         }
     }
 
+    /// <summary>进程名与 AUMID 完全对不上的应用（UWP 常见）：exe 主干 → AUMID 里的包名。</summary>
+    private static readonly (string Stem, string AumidHint)[] AumidAliases =
+    {
+        ("Microsoft.Media.Player", "ZuneMusic"), // Win11 媒体播放器
+    };
+
     public static bool MatchesExe(string aumid, string exe)
     {
         string stem = Path.GetFileNameWithoutExtension(exe);
         if (string.IsNullOrEmpty(aumid) || string.IsNullOrEmpty(stem)) return false;
-        return aumid.Contains(stem, StringComparison.OrdinalIgnoreCase)
-               || stem.Contains(aumid, StringComparison.OrdinalIgnoreCase);
+        if (aumid.Contains(stem, StringComparison.OrdinalIgnoreCase)
+            || stem.Contains(aumid, StringComparison.OrdinalIgnoreCase)) return true;
+
+        foreach ((string aliasStem, string hint) in AumidAliases)
+        {
+            if (stem.Equals(aliasStem, StringComparison.OrdinalIgnoreCase)
+                && aumid.Contains(hint, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+        return false;
     }
 
     private static GlobalSystemMediaTransportControlsSessionPlaybackStatus StatusOf(

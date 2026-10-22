@@ -707,6 +707,10 @@ internal static class Program
             case "down":
                 seq.Add((0x28, false)); seq.Add((0x28, true));
                 break;
+            case "ctrl+v":
+                seq.Add((0x11, false)); seq.Add((0x56, false));
+                seq.Add((0x56, true)); seq.Add((0x11, true));
+                break;
             case "enter":
                 seq.Add((0x0D, false)); seq.Add((0x0D, true));
                 break;
