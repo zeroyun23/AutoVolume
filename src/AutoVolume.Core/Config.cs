@@ -190,6 +190,7 @@ public sealed class AutoVolumeConfig
         Roles = new(StringComparer.OrdinalIgnoreCase)
         {
             ["QQMusic.exe"] = "controlled",
+            ["cloudmusic.exe"] = "controlled",
             ["msedge.exe"] = "source",
             ["vlc.exe"] = "source",
             ["PotPlayerMini64.exe"] = "source",
@@ -200,7 +201,7 @@ public sealed class AutoVolumeConfig
             new SchemeConfig
             {
                 Id = "music", Name = "音乐",
-                Members = { "QQMusic.exe" }
+                Members = { "QQMusic.exe", "cloudmusic.exe" }
             },
             new SchemeConfig
             {
@@ -215,7 +216,8 @@ public sealed class AutoVolumeConfig
         },
         Control = new(StringComparer.OrdinalIgnoreCase)
         {
-            ["QQMusic.exe"] = new ControlConfig { Method = "auto" }
+            ["QQMusic.exe"] = new ControlConfig { Method = "auto" },
+            ["cloudmusic.exe"] = new ControlConfig { Method = "auto" }
         }
     };
 }

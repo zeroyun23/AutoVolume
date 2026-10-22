@@ -11,9 +11,9 @@
     <RootNamespace>AutoVolume.App</RootNamespace>
     <AssemblyName>AutoVolume</AssemblyName>
     <ApplicationIcon Condition="Exists('app.ico')">app.ico</ApplicationIcon>
-    <Version>0.3.10</Version>
-    <FileVersion>0.3.10.0</FileVersion>
-    <AssemblyVersion>0.3.10.0</AssemblyVersion>
+    <Version>0.3.11</Version>
+    <FileVersion>0.3.11.0</FileVersion>
+    <AssemblyVersion>0.3.11.0</AssemblyVersion>
     <Product>AutoVolume</Product>
     <Description>Windows volume automation tray app</Description>
     <Company>AutoVolume</Company>
