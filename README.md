@@ -21,7 +21,7 @@ C# / .NET 8 + WPF，单文件自包含发布，不依赖系统 .NET。
 
 - 最新版：<https://github.com/zeroyun23/AutoVolume/releases/latest>
 - 附件 `AutoVolume.exe`（约 179 MB，自包含）
-- 同页 `AutoVolume-0.3.7.sha256.txt` 可用于校验
+- 同页 `AutoVolume-0.3.13.sha256.txt` 可用于校验
 
 双击 exe 即用；首次运行会弹设置页，勾选「开机自动启动」后以后只进托盘。
 
@@ -95,4 +95,4 @@ AutoVolume.Spike.exe sessmute QQMusic.exe
 
 ## 版本
 
-当前 `0.3.12`。行为细节与实测数据见 `docs/`。
+当前 `0.3.13`。行为细节与实测数据见 `docs/`。
