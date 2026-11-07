@@ -182,6 +182,25 @@ public sealed class AutoVolumeConfig
         return errors;
     }
 
+    /// <summary>
+    /// 非致命问题：能保存、但行为不会像用户预期。
+    /// 目前只有一种：应用只在方案成员里、角色为「未配置」——不会被监测，也不会被控制。
+    /// </summary>
+    public IReadOnlyList<string> Warnings()
+    {
+        var warnings = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var s in Schemes)
+        {
+            foreach (string m in s.Members)
+            {
+                if (RoleOf(m) != AppRole.None || !seen.Add(m)) continue;
+                warnings.Add($"方案「{s.Name}」的成员 {m} 没有角色（未配置），不会被监测或控制");
+            }
+        }
+        return warnings;
+    }
+
     public static AutoVolumeConfig CreateDefault() => new()
     {
         Mode = "strict",

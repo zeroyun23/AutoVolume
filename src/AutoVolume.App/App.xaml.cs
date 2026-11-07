@@ -69,6 +69,7 @@ public partial class App : System.Windows.Application
         AutoVolumeConfig cfg = ConfigStore.LoadOrCreate(dev);
 
         foreach (string err in cfg.Validate()) Log("配置警告：" + err);
+        foreach (string warn in cfg.Warnings()) Log("配置警告：" + warn);
 
         Runtime = new AutoVolumeRuntime(cfg, dev, noRecovery);
         Runtime.Log += Log;

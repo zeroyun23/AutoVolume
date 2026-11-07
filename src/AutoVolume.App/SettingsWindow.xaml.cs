@@ -416,6 +416,22 @@ public partial class SettingsWindow : Window
         }
 
         cfg.Normalize();
+
+        // 方案成员只决定音量归属；要触发暂停必须在「应用与控制」里设成监测源
+        var orphans = cfg.Schemes.SelectMany(s => s.Members)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Where(m => cfg.RoleOf(m) == AppRole.None)
+            .ToList();
+        if (orphans.Count > 0)
+        {
+            MessageBox.Show(this,
+                "这些应用只加进了方案，角色还是「未配置」——不会被监测，也不会被控制：\n\n  " +
+                string.Join("\n  ", orphans) +
+                "\n\n请到「应用与控制」把要监测的应用改成「监测源」，再保存。",
+                "还有应用没设角色", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
         var errors = cfg.Validate();
         if (errors.Count > 0)
         {
